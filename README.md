@@ -40,3 +40,11 @@ Set up cronjobs. For example:
 ## Coinbase - every 5 minutes
 */5 * * * * /home/pi/wazirx/venv/bin/python3 /home/pi/wazirx/fetch_cb.py >> /home/pi/wazirx/fetch_cb.log 2>&1
 ```
+
+You can spin up the frontend through the following.
+```
+source venv/bin/activate
+cd xarb
+python -m http.server 8000
+```
+Then, navigate to [localhost:8000](http://localhost:8000).
