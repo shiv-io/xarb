@@ -94,7 +94,7 @@ function refreshPage() {
     location.reload();
 }
 
-const url = 'http://skyair.local:3001/last_arb'
+const url = 'http://0.0.0.0:3001/last_arb'
 const refreshBtn = document.querySelector('.refreshBtn');
 const resultParas = document.querySelector('.resultParas');
 const dataTable = document.querySelector('.dataTable');
