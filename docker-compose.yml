@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:9.6
+        container_name: postgres
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=admin
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+        volumes:
+            - ./pg_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+    pgrest:
+        image: postgrest/postgrest:v7.0.1
+        container_name: pgrest
+        depends_on: postgres
+        environment:
+            - PGRST_DB_URI=postgresql://admin:password@0.0.0.0:5432/admin
+            - PGRST_DB_SCHEMA=public
+            - PGRST_DB_ANON_ROLE=admin
+            - PGRST_SERVER_PORT=3001
+        ports:
+            - "3001:3001"
