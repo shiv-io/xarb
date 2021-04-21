@@ -13,6 +13,7 @@ services:
                 max-file: "3"
         volumes:
             - ./pg_data:/var/lib/postgresql/data
+            - ./init_db.sql:/init_db.sql
         ports:
             - "5432:5432"
     pgrest:
