@@ -48,3 +48,6 @@ cd xarb
 python -m http.server 8000
 ```
 Then, navigate to [localhost:8000](http://localhost:8000).
+
+## Contributing
+Create an issue or open up a branch and PR.
