@@ -16,12 +16,6 @@ function displayResults(json) {
 
     result = json[0];
 
-    coinbaseUsd = document.createElement('li');
-    coinbaseUsd.textContent = 'Coinbase, USD: ' + result.coinbase_btc_usd.toLocaleString();
-
-    wazirxUsd = document.createElement('li');
-    wazirxUsd.textContent = 'WazirX, USD: ' + result.wazirx_btc_usd.toLocaleString();
-
     arbValue = document.createElement('li');
     arbValue.textContent = 'Current arbitrage value: USD ' + result.arbitrage_value_usd.toLocaleString();
 
@@ -55,9 +49,6 @@ function displayResults(json) {
         coinbaseLastUpdated.textContent = 'Coinbase spot price last updated ' + hoursAgo + ' hours ago';
     }
 
-    // resultParas.appendChild(wazirxUsd);
-    // resultParas.appendChild(coinbaseUsd);
-    // resultParas.appendChild(arbValue);
     resultParas.appendChild(exchangeRate);
     resultParas.appendChild(lastUpdated);
     resultParas.appendChild(coinbaseLastUpdated);
