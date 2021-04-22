@@ -66,6 +66,7 @@ function displayResults(json) {
     cbHeader.textContent = 'CB spot price, USD';
     cbValue = document.createElement('td');
     cbValue.textContent = result.coinbase_btc_usd.toLocaleString();
+    cbValue.className = 'cbValue';
 
     dataTable.appendChild(document.createElement('tr'));
     dataTable.appendChild(cbHeader);
@@ -85,10 +86,30 @@ function refreshPage() {
     location.reload();
 }
 
+function calculateAndDisplay() {
+    while (calculateResults.firstChild) {
+        calculateResults.removeChild(calculateResults.firstChild);
+    }
+
+    const upfrontCapital = document.querySelector('.upfrontCapital').value;
+    f = document.createElement('li');
+
+    var cbValue = document.querySelector('.cbValue').textContent // e.g. 54,500.23 (string)
+    cbValue = parseFloat(cbValue.replace(/[^0-9-.]/g, '')); // e.g. 54500.23 (float)
+    btcOffUpfront = upfrontCapital / cbValue;
+
+    f.textContent = upfrontCapital + ' USD gets you ' + btcOffUpfront + ' BTC';
+    calculateResults.appendChild(f);
+
+}
+
 const url = 'http://skyair.local:3001/last_arb'
 const refreshBtn = document.querySelector('.refreshBtn');
 const resultParas = document.querySelector('.resultParas');
 const dataTable = document.querySelector('.dataTable');
+const submitBtn = document.querySelector('.submit');
+const calculateResults = document.querySelector('.calculateResults');
 
 window.onload = getLatestData;
 refreshBtn.addEventListener('click', refreshPage);
+submitBtn.addEventListener('click', calculateAndDisplay);
