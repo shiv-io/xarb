@@ -80,10 +80,24 @@ function displayResults(json) {
     dataTable.appendChild(document.createElement('tr'));
     dataTable.appendChild(arbHeader);
     dataTable.appendChild(arbValue);
+
+    const pctReturn = (result.arbitrage_value_usd / result.coinbase_btc_usd) * 100
+    returnHeader = document.createElement('th');
+    returnHeader.textContent = 'Return on trade, %';
+    returnValue = document.createElement('td');
+    returnValue.textContent = Math.round(pctReturn * 100) / 100;
+
+    dataTable.appendChild(document.createElement('tr'));
+    dataTable.appendChild(returnHeader);
+    dataTable.appendChild(returnValue);
 }
 
 function refreshPage() {
     location.reload();
+}
+
+function up(v, n) {
+    return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
 }
 
 function calculateAndDisplay() {
@@ -96,7 +110,7 @@ function calculateAndDisplay() {
 
     var cbValue = document.querySelector('.cbValue').textContent // e.g. 54,500.23 (string)
     cbValue = parseFloat(cbValue.replace(/[^0-9-.]/g, '')); // e.g. 54500.23 (float)
-    btcOffUpfront = upfrontCapital / cbValue;
+    btcOffUpfront = up(upfrontCapital / cbValue, 8); // BTC is divisible to 8 decimal places
 
     f.textContent = upfrontCapital + ' USD gets you ' + btcOffUpfront + ' BTC';
     calculateResults.appendChild(f);
