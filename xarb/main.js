@@ -112,7 +112,7 @@ function calculateAndDisplay() {
     cbValue = parseFloat(cbValue.replace(/[^0-9-.]/g, '')); // e.g. 54500.23 (float)
     btcOffUpfront = up(upfrontCapital / cbValue, 8); // BTC is divisible to 8 decimal places
 
-    f.textContent = upfrontCapital + ' USD gets you ' + btcOffUpfront + ' BTC';
+    f.textContent = upfrontCapital + ' USD gets you ' + btcOffUpfront + ' BTC (doesn\'t account for fees)';
     calculateResults.appendChild(f);
 
 }
