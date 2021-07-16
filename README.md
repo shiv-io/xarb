@@ -1,6 +1,10 @@
 # Xarb
 
-This is a simple tool that allows you to monitor the spread in Bitcoin prices between Coinbase (large US-based crypto exchange) and WazirX (India-based crypto exchange).
+This is a simple webpage that allows you to monitor the spread in Bitcoin prices between Coinbase (large US-based crypto exchange) and WazirX (India-based crypto exchange).
+
+Preview:
+![Screen Shot 2021-07-16 at 2 27 20 PM](https://user-images.githubusercontent.com/18354771/125921815-92773c27-cbe3-406b-963e-c3af650123d8.png)
+
 
 ## Getting started
 
