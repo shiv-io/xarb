@@ -138,7 +138,7 @@ SELECT
     C.created_at AS coinbase_updated_at,
     s.last / s.inr - C.amount AS arbitrage_value_usd
 FROM
-    stg_price s
+    PUBLIC.stg_price s
     CROSS JOIN (
         SELECT
             stg_cb_ticker.base,
