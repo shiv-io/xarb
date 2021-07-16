@@ -73,7 +73,7 @@ function displayResults(json) {
     dataTable.appendChild(cbValue);
 
     arbHeader = document.createElement('th');
-    arbHeader.textContent = 'Delta, USD';
+    arbHeader.textContent = 'Spread, USD';
     arbValue = document.createElement('td');
     arbValue.textContent = result.arbitrage_value_usd.toLocaleString();
 
@@ -117,7 +117,7 @@ function calculateAndDisplay() {
 
 }
 
-const url = 'http://skyair.local:3001/last_arb'
+const url = 'http://localhost:3001/last_arb'
 const refreshBtn = document.querySelector('.refreshBtn');
 const resultParas = document.querySelector('.resultParas');
 const dataTable = document.querySelector('.dataTable');
@@ -126,4 +126,4 @@ const calculateResults = document.querySelector('.calculateResults');
 
 window.onload = getLatestData;
 refreshBtn.addEventListener('click', refreshPage);
-submitBtn.addEventListener('click', calculateAndDisplay);
+// submitBtn.addEventListener('click', calculateAndDisplay);
