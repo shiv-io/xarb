@@ -13,7 +13,7 @@ CREATE TABLE PUBLIC.fx (
     inr DOUBLE PRECISION,
     constraint fx_pkey primary key (last_updated_at)
 );
-CREATE TABLE PUBLIC.ticker (
+CREATE TABLE PUBLIC.wazirx_ticker (
     base_unit text COLLATE pg_catalog."default",
     quote_unit text COLLATE pg_catalog."default",
     low text COLLATE pg_catalog."default",
@@ -27,7 +27,6 @@ CREATE TABLE PUBLIC.ticker (
     AT bigint,
     NAME text COLLATE pg_catalog."default"
 );
-
 CREATE
 OR REPLACE VIEW PUBLIC.stg_cb_ticker AS
 SELECT
@@ -41,7 +40,6 @@ SELECT
     ) AS created_at_timestamp
 FROM
     cb_ticker;
-
 CREATE
     OR REPLACE VIEW PUBLIC.stg_fx AS
 SELECT
@@ -54,7 +52,6 @@ SELECT
     fx.inr
 FROM
     fx;
-
 CREATE
     OR REPLACE VIEW PUBLIC.stg_price AS
 SELECT
@@ -92,9 +89,8 @@ FROM
     ) f
 ORDER BY
     s.created_at DESC;
-
 CREATE
-    OR REPLACE VIEW PUBLIC.stg_ticker AS
+    OR REPLACE VIEW PUBLIC.stg_wazirx_ticker AS
 SELECT
     ticker.type,
     ticker.name,
@@ -112,8 +108,7 @@ SELECT
         ticker.at :: DOUBLE PRECISION
     ) AS created_at
 FROM
-    ticker;
-
+    wazirx_ticker;
 CREATE
     OR REPLACE VIEW PUBLIC.last_arb AS
 SELECT

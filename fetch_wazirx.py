@@ -46,7 +46,7 @@ def main():
 
         if not df.empty:
             df.to_sql(
-                "ticker",
+                "wazirx_ticker",
                 con=postgres_engine,
                 if_exists="append",
                 index=False,
