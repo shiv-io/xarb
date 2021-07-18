@@ -17,23 +17,17 @@ def main():
     if response.status_code == 200:
         result = response.json()
         btc_inr = result.get("btcinr")
-        eth_inr = result.get("ethinr")
 
         df = pd.DataFrame()
 
         # The following keys are string-formatted, so we want to convert these
         # to floats
         str_keys = ["low", "high", "last", "open", "volume", "sell", "buy"]
-        for x in [btc_inr, eth_inr]:
-            if x is not None:
-                for k, v in x.items():
-                    if k in str_keys:
-                        x[k] = float(v)
-
         if btc_inr is not None:
+            for k, v in btc_inr.items():
+                if k in str_keys:
+                    btc_inr[k] = float(v)
             df = df.append([btc_inr])
-        if eth_inr is not None:
-            df = df.append([eth_inr])
 
         if not df.empty:
             df["at"] = pd.to_datetime(df["at"], unit="s")
