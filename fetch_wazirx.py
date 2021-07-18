@@ -21,15 +21,9 @@ def main():
 
         df = pd.DataFrame()
 
-        str_keys = [
-            "low",
-            "high",
-            "last",
-            "open",
-            "volume",
-            "sell",
-            "buy"
-        ]
+        # The following keys are string-formatted, so we want to convert these
+        # to floats
+        str_keys = ["low", "high", "last", "open", "volume", "sell", "buy"]
         for x in [btc_inr, eth_inr]:
             if x is not None:
                 for k, v in x.items():
@@ -40,11 +34,10 @@ def main():
             df = df.append([btc_inr])
         if eth_inr is not None:
             df = df.append([eth_inr])
-        
-
-        print(df)
 
         if not df.empty:
+            df["at"] = pd.to_datetime(df["at"], unit="s")
+            print(df)
             df.to_sql(
                 "wazirx_ticker",
                 con=postgres_engine,
