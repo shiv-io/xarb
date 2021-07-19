@@ -7,6 +7,9 @@ from time import sleep
 postgres_conn_str = os.environ.get(
     "POSTGRES_CONN_STR", "postgresql://admin:password@0.0.0.0:5432/admin"
 )
+# Heroku: https://help.heroku.com/ZKNTJQSK/why-is-sqlalchemy-1-4-x-not-connecting-to-heroku-postgres
+if postgres_conn_str.startswith("postgres://"):
+    postgres_conn_str = postgres_conn_str.replace("postgres://", "postgresql://", 1)
 postgres_engine = sa.create_engine(postgres_conn_str)
 
 
