@@ -37,4 +37,7 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           justlogin: true
       - name: Fetch Exchange Rates
-        run: export EXCHANGE_RATE_API_KEY=${{ secrets.EXCHANGE_RATE_API_KEY }} && python fetch_fx.py
+        run: |
+          export EXCHANGE_RATE_API_KEY=${{ secrets.EXCHANGE_RATE_API_KEY }}
+          export export POSTGRES_CONN_STR=$(heroku config:get DATABASE_URL -a xarb)
+          python fetch_fx.py
