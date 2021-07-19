@@ -34,5 +34,5 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           justlogin: true
-      - name: Fetch WazirX data
-        run: POSTGRES_CONN_STR=$(heroku config:get DATABASE_URL -a xarb) python fetch_wazirx.py
+      - name: Fetch WazirX & Coinbase data
+        run: export POSTGRES_CONN_STR=$(heroku config:get DATABASE_URL -a xarb) && python fetch_wazirx.py && fetch_cb.py
