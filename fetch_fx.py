@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 import os
 from time import sleep
 
-from fetch import postgres_conn_str
+from fetch_wazirx import postgres_conn_str
 
 postgres_engine = sa.create_engine(postgres_conn_str)
 
@@ -23,7 +23,7 @@ def main():
             cad = rates["CAD"]
             inr = rates["INR"]
             _data = {
-                "last_updated_at": last_updated_at,
+                "last_updated_at": pd.Timestamp(last_updated_at, unit='s'),
                 "usd": usd,
                 "cad": cad,
                 "inr": inr
