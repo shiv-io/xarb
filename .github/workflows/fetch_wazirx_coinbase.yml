@@ -5,6 +5,8 @@ name: Fetch WazirX & Coinbase data
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
 
 jobs:
   build:
