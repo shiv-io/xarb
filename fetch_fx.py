@@ -5,9 +5,14 @@ from sqlalchemy.exc import IntegrityError
 import os
 from time import sleep
 
-from fetch_wazirx import postgres_conn_str
-
+postgres_conn_str = os.environ.get(
+    "POSTGRES_CONN_STR", "postgresql://admin:password@0.0.0.0:5432/admin"
+)
+# Heroku: https://help.heroku.com/ZKNTJQSK/why-is-sqlalchemy-1-4-x-not-connecting-to-heroku-postgres
+if postgres_conn_str.startswith("postgres://"):
+    postgres_conn_str = postgres_conn_str.replace("postgres://", "postgresql://", 1)
 postgres_engine = sa.create_engine(postgres_conn_str)
+
 
 def main():
     api_key = os.environ.get("EXCHANGE_RATE_API_KEY")
@@ -23,10 +28,10 @@ def main():
             cad = rates["CAD"]
             inr = rates["INR"]
             _data = {
-                "last_updated_at": pd.Timestamp(last_updated_at, unit='s'),
+                "last_updated_at": pd.Timestamp(last_updated_at, unit="s"),
                 "usd": usd,
                 "cad": cad,
-                "inr": inr
+                "inr": inr,
             }
             df = pd.DataFrame([_data])
             if not df.empty:
@@ -41,6 +46,7 @@ def main():
                     print("Exported")
                 except IntegrityError:
                     print("Data already exists.")
+
 
 if __name__ == "__main__":
     main()
