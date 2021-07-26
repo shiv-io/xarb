@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 import os
@@ -71,22 +72,30 @@ def serve_layout():
         title="Return on Spread",
     )
     fig.layout.yaxis.tickformat = ".2%"
-    fig.update_layout(hovermode="x", yaxis_title="Return on Spread")
+    fig.update_layout(hovermode="x", yaxis_title="Return on Spread", height=600)
     fig.update_traces(mode="markers+lines", hovertemplate=None)
 
     # Spread (absolute value)
-    spread_fig = px.line(
-        data_frame=merged,
-        x="at",
-        y=[merged["amount"], merged["sell_inr"]],
-        labels={"at": "Timestamp (UTC)", "amount": "Coinbase", "sell_inr": "WazirX"},
-        title="BTC Price Spread: Coinbase and WazirX",
-        hover_name="spread",
+    layout = go.Layout(height=600)
+    spread_fig = go.Figure(layout=layout)
+
+    spread_fig.add_trace(
+        go.Line(x=merged["at"], y=merged["amount"], name="Coinbase BTCUSD")
+    )
+    spread_fig.add_trace(
+        go.Line(
+            x=merged["at"],
+            y=merged["sell_inr"],
+            name="WazirX BTCUSD (converted from BTCINR)",
+        )
     )
     spread_fig.update_layout(
+        title="BTC Price Spread: Coinbase and WazirX",
         hovermode="x unified",
-        yaxis_title="Price, US$",
+        xaxis_title="Timestamp (UTC)",
+        yaxis_title="Price, USD",
         legend_title="",
+        legend={"orientation": "h"},
         yaxis_tickformat="$",
     )
     spread_fig.update_traces(mode="markers+lines", hovertemplate="%{y}")
