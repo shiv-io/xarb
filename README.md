@@ -1,6 +1,6 @@
 # Xarb
 
-This is a simple webpage that allows you to monitor the spread in Bitcoin prices between Coinbase (large US-based crypto exchange) and WazirX (India-based crypto exchange).
+This is a [simple webpage](http://xarb.herokuapp.com) that allows you to monitor the spread in Bitcoin prices between Coinbase (large US-based crypto exchange) and WazirX (India-based crypto exchange).
 
 ![Screen Shot 2021-07-26 at 6 23 50 PM](https://user-images.githubusercontent.com/18354771/126991965-1f252c81-5311-4474-bc85-818eaf2d1b02.png)
 
