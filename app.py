@@ -13,7 +13,7 @@ import sqlalchemy as sa
 postgres_conn_str = os.environ.get(
     "DATABASE_URL", "postgresql://admin:password@0.0.0.0:5432/admin"
 )
-# Heroku: https://help.heroku.com/ZKNTJQSK/why-is-sqlalchemy-1-4-x-not-connecting-to-heroku-postgres
+# Heroku CLI returns DATABASE_URL with postgres:// but SQLAlchemy only supports postgresql://
 if postgres_conn_str.startswith("postgres://"):
     postgres_conn_str = postgres_conn_str.replace("postgres://", "postgresql://", 1)
 engine = sa.create_engine(postgres_conn_str)
@@ -110,7 +110,19 @@ def serve_layout():
                 align="center",
             ),
             dcc.Graph(id="spread", figure=spread_fig),
-            dcc.Graph(id="example-graph", figure=fig),
+            dbc.Row(
+                [
+                    html.Div(
+                        children=f"""
+                The below chart shows a theoretical return on spread that can be achieved by buying low on one exchange
+                and selling high on the other. Disclaimer: The data does not take into account fees and associated taxes.
+                """
+                    )
+                ],
+                justify="center",
+                align="left",
+            ),
+            dcc.Graph(id="spread-return-pct", figure=fig),
         ]
     )
 
