@@ -19,13 +19,6 @@ Spin up Postgres backend and pgREST API:
 docker-compose up -d
 ```
 
-Initalize the db:
-
-```
-docker exec -it postgres bash
-PGPASS=password psql -U admin -d admin -a -f init_db.sql
-```
-
 Initialize python virtual environment, install dependencies:
 
 ```
@@ -56,11 +49,8 @@ Optionally, set up cronjobs. For example:
 You can spin up the frontend through the following.
 ```
 source venv/bin/activate
-cd xarb
-python -m http.server 8000
+gunicorn app:server
 ```
-
-Then, navigate to [localhost:8000](http://localhost:8000).
 
 ## Contributing
 Create an issue or open up a branch and PR.
