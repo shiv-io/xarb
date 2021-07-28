@@ -19,4 +19,4 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           justlogin: true
       - name: Run script
-        run: heroku pg:psql postgresql-horizontal-40030 --app xarb -f delete_older_than_7d_rows.sql
+        run: heroku pg:psql postgresql-horizontal-40030 --app xarb -f delete_old_rows.sql
