@@ -40,8 +40,8 @@ def serve_layout():
         fx = pd.read_sql("SELECT last_updated_at, usd, inr from fx", conn)
 
     merged = pd.merge_asof(
-        wazir,
-        cb,
+        wazir.sort_values("at"),
+        cb.sort_values("created_at"),
         left_on="at",
         right_on="created_at",
         allow_exact_matches=True,
@@ -49,8 +49,8 @@ def serve_layout():
     )
 
     merged = pd.merge_asof(
-        merged,
-        fx,
+        merged.sort_values("at"),
+        fx.sort_values("last_updated_at"),
         left_on="at",
         right_on="last_updated_at",
         allow_exact_matches=True,
