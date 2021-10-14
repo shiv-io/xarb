@@ -51,5 +51,11 @@ source venv/bin/activate
 gunicorn app:server
 ```
 
+## Deployment
+
+I deployed this app using a Heroku app with a Heroku PostgresQL backend. A couple of GitHub Actions take care of populating the database with data, as well as deleting old rows (>2 weeks). [UptimeRobot](https://uptimerobot.com/) lets me know if the app goes down for some reason. 
+
+The whole setup cost $0.00.
+
 ## Contributing
 Create an issue or open up a branch and PR.
